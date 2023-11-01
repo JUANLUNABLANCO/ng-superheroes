@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.borderred {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+}
+
+
+
+/* ------------------------------------------------------------------------- */
+/*  Snackbar
+/* ------------------------------------------------------------------------- */
+.mat-mdc-snack-bar-container.snackbar-type-soft-error .mdc-snackbar__surface {
+  background-color: #f69a2c !important;
+}
+.mat-mdc-snack-bar-container.snackbar-type-soft-error .mdc-snackbar__surface .mat-mdc-button {
+  color: #120303 !important;
+}

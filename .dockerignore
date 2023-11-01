@@ -1,0 +1,10 @@
+# Archivos locales
+.git
+.editorconfig
+/node_modules
+/e2e
+/dist
+/docs
+.gitignore
+*.zip
+*.md
