@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { Subscription, map } from 'rxjs';
+
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../../share/components/dialog/dialog.component';
 
 import { Superhero } from '../../models/superhero.model';
 
@@ -33,10 +35,9 @@ export class SuperheroEditComponent  implements OnInit, OnDestroy{
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private superheroesService: SuperheroesService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
-
-
 
   ngOnInit(): void {
     this.actualiceParams();
@@ -101,10 +102,21 @@ export class SuperheroEditComponent  implements OnInit, OnDestroy{
   cancelCreate() {
     // cancelar
   }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  showDialogCancel(): void {
+    this.dialog.open(DialogComponent, {
+      data: "¿Etás seguro perderás la información?"
+    })
+    .afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        // do something actualizar los datos anteriroes
+      }
+      else {
+        // do nothing
+        return;
+      }
+    });
   }
+
   onSubmit(form: FormGroup) {
     if(this.formEdit.invalid) {
       return;
@@ -121,5 +133,8 @@ export class SuperheroEditComponent  implements OnInit, OnDestroy{
         console.log(' complete');
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
