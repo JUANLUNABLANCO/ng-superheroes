@@ -1,1 +1,81 @@
-<p>superheroes-list works!</p>
+<h1 style="text-align: center;">Superheroes List</h1>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-form-field>
+    <mat-label>Filetring By name</mat-label>
+    <input type="text" matInput [(ngModel)]="filterValue" (input)="findByName(filterValue)" placeholder="Search name"
+      data-test-id="searchNameField">
+  </mat-form-field>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <a [routerLink]="['create']"  mat-raised-button color="primary">
+    <mat-icon>add</mat-icon> Superhero
+  </a>
+</div>
+
+
+
+<div fxLayout="row" fxLayoutAlign="center">
+  <!-- fxFlex.gt-lg="80" fxFlex.xl="60" fxFlex.lt-lg="100" -->
+  <div *ngIf="dataSource" fxLayout="column"  fxFlex.lt-lg="100" fxFlex="80" fxFlex.gt-lg="40" >
+    <mat-table [dataSource]="dataSource.items" class="mat-elevation-z8" data-test-id="usersTable" fxLayout="column">
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="id" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="5%" class="border-grey-light"> ID </mat-header-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="5%" class="border-grey-light"> {{superhero.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light"> Name </mat-header-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.name}} </mat-cell>
+      </ng-container>
+
+      <!-- alias Column -->
+      <ng-container matColumnDef="alias">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light"> alias </mat-header-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.alias}} </mat-cell>
+      </ng-container>
+
+      <!-- city Column -->
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light">City</mat-header-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.city}} </mat-cell>
+      </ng-container>
+
+      <!-- image Column -->
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light"> image </mat-header-cell>
+        <mat-cell *matCellDef="let superhero"  fxFlex="20%" class="center border-grey-light">
+          <app-sph-list-item-image image="{{superhero.image}}" >
+
+          </app-sph-list-item-image>
+        </mat-cell>
+      </ng-container>
+
+      <!-- buttons -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="15%" class="border-grey-light"> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let superhero"  fxFlex="15%" class="center border-grey-light">
+          <a mat-mini-fab color="primary" aria-label="button view superhero" [routerLink]="['detail', superhero.id]" >
+            <mat-icon>visibility</mat-icon>
+          </a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- definition structure table-->
+      <!-- (click)="navigateToHeroeDetail(superhero.id)" -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let superhero; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="dataSource.meta.totalItems"
+      [pageSize]="dataSource.meta.itemsPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent = $event; onPaginateChange($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+<h2 *ngIf="!dataSource" style="text-align: center;"> Todavía, no hay Super Héroes en la Base de datos</h2>

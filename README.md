@@ -292,7 +292,56 @@ Lo suyo es crear otros guards como por ejemplo:
   1. **UserIsUserGuard:** que compruebe que el usuario que accede a una ruta es el usuario que corresponde, así nadie podrá entrar en nuestro perfil
   2. **AdminGuard:** que ese usuario que está intentando acceder a esa ruta privada de administración tiene un role de 'admin'
 
+hemos añadido un toast o sweetalert, en concreto es de angularMaterial, para mensajes al usuario y aumentar así la experiencia del mismo
+
+Antes de meternos en más jaleo, voy a proponer git flow, antes debo subir la la task01_scafolding y task02_auth
+
+```bash
+# subir el codigo antes de implementar git flow
+git branch -M main
+git status
+git add .
+git commit -m "task02_auth: authentication, register, login, jwt, guard, interceptor, ..."
+git push
+
+# empezar git flow y configurarlo
+git flow init
+
+# comenzar una nueva feature
+git flow feature start task03_superheroes
+```
+
 Vamos a la parte de los superheroes
+
+Hemos creado una comunicación de padre a hijo con los componentes superheroes-list.component y sph-list-item-iamge.component, en concreto el padre conocedor de todos los superhérores, le pasará el nombre de la imagen y el hijo lo recibirá para poder construirla dentro de la etiqueta <img> también controla que si no se le envía nombre ninguno, porque no exista, pondrá una imagen por defecto
+
+Hemos metido una paginación usando el módulo paginator de angular material, pero se va a hacer difícil, paginar datos mockeados, y tiene más trabajo que hacerlo con los datos que nos llegarían ya paginados desde el backend. Lo dejaré para el final, no quiero invertir más de 16h en esta prueba, y ha habido partes como la de docker, que tenía un poco oxidada que me consumió bastante tiempo.
+
+También usamos una tabla para mostrar los datos que nos llegan, usando MatTableModule
+
+Ahora para poder darle un mejor estilo sin cambiar de angular material usaré flexBox, que nos proporciona una manera simple de posicionar objetos en la vista sin demasiado esfuerzo solo con directivas y sin usar css.
+
+```bash
+npm install @angular/flex-layout@latest --save
+```
+
+importamos su módulo a nivel genérico, dentro del MaterialModule
+
+```typescript
+import { FlexLayoutModule } from ‘@angular/flex-layout’;
+@NgModule({
+    declarations: [ ... ],
+    imports: [ ..., FlexLayoutModule ],
+})
+export class MaterialModule { }
+```
+
+y lo usamos en las vistas, para centrar tablas, limitar su tamaño, e cambiarlo en dispositivos más pequeños
+
+```html
+<div fxLayout="row" fxLayoutAlign="center">
+  <div *ngIf="dataSource" fxLayout="column" fxFlex.lg="80" fxFlex.xs="100">
+```
 
 
 

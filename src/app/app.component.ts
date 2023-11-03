@@ -35,7 +35,9 @@ export class AppComponent {
     if( !environment.production) {
       console.log('Enviroment Control: ', environment.CONTROL);
       console.log('Enviroment API_URL: ', environment.API_URL);
-      console.log('Environment IMAGE_BASE_PATH: ', environment.IMAGE_BASE_PATH);
+      console.log('Environment BASE_THUMBNAILS_PATH: ', environment.BASE_THUMBNAILS_URL);
+      console.log('Environment BASE_POSTERS_PATH: ', environment.BASE_POSTERS_URL);
+
     }
   }
 

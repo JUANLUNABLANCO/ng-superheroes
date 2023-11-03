@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SuperheroesListComponent } from './components/superheroes-list/superheroes-list.component';
-import { SuperheroeDetailComponent } from './components/superheroe-detail/superheroe-detail.component';
+import { SuperheroDetailComponent } from './components/superhero-detail/superhero-detail.component';
+import { SuperheroCreateComponent } from './components/superhero-create/superhero-create.component';
+import { SuperheroEditComponent } from './components/superhero-edit/superhero-edit.component';
 
 const routes: Routes = [
   {
@@ -9,8 +11,16 @@ const routes: Routes = [
     component: SuperheroesListComponent
   },
   {
-    path: ':id',
-    component: SuperheroeDetailComponent
+    path: 'create',
+    component: SuperheroCreateComponent
+  },
+  {
+    path: 'detail/:id',
+    component: SuperheroDetailComponent
+  },
+  {
+    path: 'edit/:id',
+    component: SuperheroEditComponent
   },
   {
     path: '**',

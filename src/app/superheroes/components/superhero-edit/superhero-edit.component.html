@@ -1,0 +1,81 @@
+
+<h2 fxLayoutAlign="center center">Editing Superhero</h2>
+<div class="card-container" >
+  <form [formGroup]="formEdit" (ngSubmit)="onSubmit(formEdit)">
+  <div class="card-wrapper" *ngIf="superhero; else notSuperhero" class="main-div">
+
+    <mat-card class="hero-card">
+      <mat-card-header>
+        <img mat-card-avatar
+          src="{{thumbnailsUrl}}" alt="avatar" *ngIf="superhero.image; else notImageSuperhero"
+        />
+        <ng-template #notImageSuperhero>
+          <img src="{{thumbnailsUrl}}" alt="an avatar image for profile" mat-card-avatar>
+        </ng-template>
+         <!-- {{ superhero.name }} -->
+         <mat-card-title>Name</mat-card-title>
+        <mat-card-title>
+          <mat-form-field>
+            <input matInput formControlName="name" data-test-id="nameField" >
+            <mat-error *ngIf="nameField?.invalid">
+              hero name not valid
+            </mat-error>
+          </mat-form-field>
+        </mat-card-title>
+        <!-- {{ superhero.alias }} -->
+        <mat-card-subtitle>
+          Alias
+          <mat-form-field>
+            <input matInput formControlName="alias" data-test-id="aliasField">
+            <mat-error *ngIf="aliasField?.invalid">
+              alias not avlid
+            </mat-error>
+          </mat-form-field>
+        </mat-card-subtitle>
+         <!-- {{ superhero.city }} -->
+         <mat-card-subtitle>
+          City
+          <mat-form-field>
+            <input matInput formControlName="city" data-test-id="cityField">
+            <mat-error *ngIf="cityField?.invalid">
+              city not avlid
+            </mat-error>
+          </mat-form-field>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image  class="poster" src="{{postersUrl}}" alt="Angular Logo">
+      <mat-card-content>
+        <!-- {{ superhero.bio }} -->
+        <p>
+          <mat-form-field>
+            <textarea matInput formControlName="bio" data-test-id="bioField" cols="55" rows="10"   ></textarea>
+            <mat-error *ngIf="bioField?.invalid">
+              bio not valid
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <!-- <h3>Powers:</h3>
+          <ul>
+            <li *ngFor="let power of superhero.powers">
+              {{ power }}
+            </li>
+          </ul>
+          <h3>Enemies:</h3>
+          <ul>
+            <li *ngFor="let enemie of superhero.enemies">
+              {{ enemie }}
+            </li>
+          </ul> -->
+      </mat-card-content>
+    </mat-card>
+    <mat-card-actions class="action-buttons" fxLayoutAlign="end">
+      <button mat-raised-button color="primary" (click)="saveSuperhero()">Save</button>
+      <button mat-raised-button color="warn" (click)="cancelCreate()">Cancel</button>
+    </mat-card-actions>
+
+  </div>
+  <ng-template #notSuperhero>
+    No hay usuario con ese id: {{  superheroId }}
+  </ng-template>
+  </form>
+</div>
