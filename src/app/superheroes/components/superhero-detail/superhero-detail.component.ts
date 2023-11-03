@@ -5,8 +5,11 @@ import { Subscription, map } from 'rxjs';
 import { Superhero } from '../../models/superhero.model';
 
 import { SuperheroesService } from '../../services/superheroes.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../../share/components/dialog/dialog.component';
 
 const BASE_THUMBNAILS_URL = environment.BASE_THUMBNAILS_URL;
 const BASE_POSTERS_URL = environment.BASE_POSTERS_URL;
@@ -29,6 +32,8 @@ export class SuperheroDetailComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private superheroesService: SuperheroesService,
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +67,20 @@ export class SuperheroDetailComponent implements OnInit, OnDestroy {
 
   deleteSuperhero() {
     this.superheroesService.deleteSuperhero(Number(this.superheroId))?.subscribe();
-
+  }
+  showDialogDelete(): void {
+    this.dialog.open(DialogComponent, {
+      data: "¿Are you sure, you will lost the superhero forever?"
+    })
+    .afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.deleteSuperhero();
+      }
+      else {
+        // do nothing
+        return;
+      }
+    });
   }
 
   ngOnDestroy(): void {

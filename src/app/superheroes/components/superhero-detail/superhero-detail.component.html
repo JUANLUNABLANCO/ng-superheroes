@@ -40,7 +40,7 @@
 
       <mat-card-actions class="action-buttons">
         <button mat-raised-button color="primary" [routerLink]="['/superheroes', 'edit', superhero.id]">edit</button>
-        <button mat-raised-button color="warn" (click)="deleteSuperhero()">delete</button>
+        <button mat-raised-button color="warn" (click)="showDialogDelete()">delete</button>
       </mat-card-actions>
     </mat-card>
 

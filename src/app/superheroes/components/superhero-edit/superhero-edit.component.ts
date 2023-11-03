@@ -108,7 +108,7 @@ export class SuperheroEditComponent  implements OnInit, OnDestroy{
     })
     .afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        // do something actualizar los datos anteriroes
+        this.router.navigate(['superheroes', 'detail', this.superhero.id]);
       }
       else {
         // do nothing
