@@ -1,0 +1,51 @@
+
+<h2 fxLayoutAlign="center center">Superhero Detail</h2>
+<div class="card-container" >
+  <div class="card-wrapper" *ngIf="superhero; else notSuperhero" class="main-div">
+
+    <mat-card class="hero-card">
+      <mat-card-header>
+        <img mat-card-avatar
+          src="{{thumbnailsUrl}}" alt="avatar" *ngIf="superhero.image; else notImageSuperhero"
+        />
+        <ng-template #notImageSuperhero>
+          <img src="{{thumbnailsUrl}}" alt="an avatar image for profile" mat-card-avatar>
+        </ng-template>
+        <mat-card-title>{{ superhero.name }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ superhero.alias }}
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          {{ superhero.city }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image  class="poster" src="{{postersUrl}}" alt="Angular Logo">
+      <mat-card-content>
+        <p>
+          {{ superhero.bio }}
+        </p>
+        <h3>Powers:</h3>
+          <ul>
+            <li *ngFor="let power of superhero.powers">
+              {{ power }}
+            </li>
+          </ul>
+          <h3>Enemies:</h3>
+          <ul>
+            <li *ngFor="let enemie of superhero.enemies">
+              {{ enemie }}
+            </li>
+          </ul>
+      </mat-card-content>
+
+      <mat-card-actions class="action-buttons">
+        <button mat-raised-button color="primary" [routerLink]="['/superheroes', 'edit', superhero.id]">edit</button>
+        <button mat-raised-button color="warn" (click)="showDialogDelete()">delete</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+  <ng-template #notSuperhero>
+    No hay usuario con ese id: {{  superheroId }}
+  </ng-template>
+</div>

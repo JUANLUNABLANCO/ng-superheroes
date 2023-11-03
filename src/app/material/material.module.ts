@@ -12,6 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MaterialNeeded = [
   CommonModule,
@@ -24,7 +26,9 @@ const MaterialNeeded = [
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  FlexLayoutModule,
+  MatDialogModule
 ];
 
 @NgModule({

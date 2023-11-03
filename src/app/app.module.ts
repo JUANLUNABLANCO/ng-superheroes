@@ -21,6 +21,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserIsAuthenticatedComponent } from './components/user-is-authenticated/user-is-authenticated.component';
+import { DialogComponent } from './share/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UserIsAuthenticatedComponent } from './components/user-is-authenticated
     RegisterComponent,
     LoginComponent,
     UserIsAuthenticatedComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
