@@ -29,7 +29,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light"> Name </mat-header-cell>
-        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.name}} </mat-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.name | uppercase}} </mat-cell>
       </ng-container>
 
       <!-- alias Column -->
@@ -39,10 +39,10 @@
       </ng-container>
 
       <!-- city Column -->
-      <ng-container matColumnDef="city">
+      <ng-container matColumnDef="city" >
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light">City</mat-header-cell>
-        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.city}} </mat-cell>
-      </ng-container>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light" > {{superhero.city}} </mat-cell>
+      </ng-container >
 
       <!-- image Column -->
       <ng-container matColumnDef="image">
@@ -55,7 +55,7 @@
       </ng-container>
 
       <!-- buttons -->
-      <ng-container matColumnDef="actions">
+      <ng-container matColumnDef="actions" >
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="15%" class="border-grey-light"> Actions </mat-header-cell>
         <mat-cell *matCellDef="let superhero"  fxFlex="15%" class="center border-grey-light">
           <a mat-mini-fab color="primary" aria-label="button view superhero" [routerLink]="['detail', superhero.id]" >
@@ -67,7 +67,7 @@
       <!-- definition structure table-->
       <!-- (click)="navigateToHeroeDetail(superhero.id)" -->
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let superhero; columns: displayedColumns"></mat-row>
+      <mat-row *matRowDef="let superhero; columns: displayedColumns" AppHoverHighlight></mat-row>
     </mat-table>
     <mat-paginator
       [length]="dataSource.meta.totalItems"
