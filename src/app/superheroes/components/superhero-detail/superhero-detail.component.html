@@ -19,7 +19,7 @@
           {{ superhero.city }}
         </mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image  class="poster" src="{{postersUrl}}" alt="Angular Logo">
+      <img mat-card-image  class="poster" src="{{postersUrl}}" alt="poster for superhero">
       <mat-card-content>
         <p>
           {{ superhero.bio }}
@@ -38,9 +38,12 @@
           </ul>
       </mat-card-content>
 
-      <mat-card-actions class="action-buttons">
-        <button mat-raised-button color="primary" [routerLink]="['/superheroes', 'edit', superhero.id]">edit</button>
-        <button mat-raised-button color="warn" (click)="showDialogDelete()">delete</button>
+      <mat-card-actions class="action-buttons" fxLayout="row" fxLayoutGap="6px">
+        <button mat-raised-button color="secondary" [routerLink]="['/superheroes']"><mat-icon>arrow_back</mat-icon></button>
+        <button mat-raised-button color="primary" [routerLink]="['/superheroes', 'edit', superhero.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="warn" (click)="showDialogDelete()"><mat-icon>delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
 

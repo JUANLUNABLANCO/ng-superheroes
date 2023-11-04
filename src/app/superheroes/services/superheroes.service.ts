@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Superhero, createSuperheroDTO, ISuperheroesPaginated } from '../models/superhero.model';
-import { SuperheroesFake, SuperheroesPaginatedFake } from './fake-data-superheroes';
+import { Superhero, ISuperheroesPaginated } from '../models/superhero.model';
+import { SuperheroesFake, SuperheroesPaginatedFake, PowersFake, EnemiesFake } from './fake-data-superheroes';
 import { environment } from 'src/environments/environment';
 import { Observable, of, from, throwError } from 'rxjs';
-import { map, catchError, mapTo, switchMap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 const BASE_URL = environment.API_URL;
 @Injectable({
@@ -97,23 +97,23 @@ export class SuperheroesService {
     // o retornamos el objeto paginación
     // TODO paginacion return // esto de la paginación se complica con datos fake, mucho demasiado...
 }
-
-
-  updateSuperhero(id: string, superhero: any) {
+  updateSuperhero(id: number, superhero: any): Observable<Superhero[]> {
     // TODO backend 
     // return this.http.put(`${BASE_URL}/superheros/${id}`, changes);
 
     // SIN backend ##########
-    const index = SuperheroesFake.findIndex((itemArray) => itemArray.id === superhero.id);
+    const index = SuperheroesFake.findIndex((itemArray) => itemArray.id === id);
     if (index !== -1) {
+      // algunos datos los perdemos por el camino
+      superhero.id = id;
+      superhero.image = SuperheroesFake[index].image;
       SuperheroesFake[index] = superhero;
-      return superhero; // Devuelve el objeto actualizado
+      return of(SuperheroesFake); // Devuelve el objeto actualizado o Devolvemos el array Paginado de superheroes
     } else {
       // El objeto con ese id no se encontró
-      return null;
+      return of(SuperheroesFake);
     }
   }
-
   deleteSuperhero(id: number): Observable<Superhero[]> | null {
     // return this.http.delete(`${BASE_URL}/superheros/${id}`);
     const index = SuperheroesFake.findIndex((superhero) => superhero.id === Number(id));
@@ -126,5 +126,15 @@ export class SuperheroesService {
       // El objeto con ese id no se encontró
       return null;
     }
+  }
+  getPowers(): Observable<string[]> {
+    // TODO si hubiese backend
+    // return this.http.get<string[]>(`${BASE_URL}/api/powers`);
+    return of(PowersFake); // fake data
+  }
+  getEnemies(): Observable<string[]> {
+    // TODO si hubiese backend
+    // return this.http.get<string[]>(`${BASE_URL}/api/enemies`);
+    return of(EnemiesFake); // fake data
   }
 }

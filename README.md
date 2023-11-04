@@ -66,81 +66,61 @@ npm install --save-dev rimraf
 
 ### Creación de la estructura del proyecto
 
-Si fuese un proyecto más grande que no tuviera solo superheroes, sino otras entidades, y usando la arquitectyra hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
+Si fuese un proyecto más grande que no tuviera solo superheroes, sino otras entidades, y usando la arquitectura hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
 
-superheroes-app/
-│
-├── src/
-│   │
-│   ├── app/
-│   │   │
-│   │   ├── core/
-│   │   │   │
-│   │   │   ├── domain/
-│   │   │   │   ├── superhero.model.ts
-│   │   │   │
-│   │   │   ├── services/
-│   │   │   │   ├── superhero.service.ts
-│   │   │
-│   │   ├── features/
-│   │   │   │
-│   │   │   ├── superheroes/
-│   │   │   │   │
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── superhero-list.component.ts
-│   │   │   │   │   ├── superhero-detail.component.ts
-│   │   │   │   │   ├── superhero-form.component.ts
-│   │   │   │   │
-│   │   │   │   ├── services/
-│   │   │   │   │   ├── superheroes-data.service.ts
-│   │   │   │   │
-│   │   │   │   ├── superheroes.module.ts
-│
-├── assets/
-├── environments/
-├── ...
+- **src/**
+  - **app/**
+    - **core/**
+      - **models/**
+        - `superhero.model.ts` (Modelos de superhéroes)
+      - **services/**
+        - `superhero.service.ts` (Servicios para superhéroes)
+      - **guards/**
+        - `auth.guard.ts` (Guardia de autenticación)
+      - `core.module.ts` (Módulo principal de la aplicación)
+    - **shared/**
+      - **components/**
+        - `superhero-list.component.ts` (Componente de lista de superhéroes)
+        - `superhero-detail.component.ts` (Componente de detalles de superhéroes)
+      - **modules/**
+        - `shared.module.ts` (Módulo compartido)
+      - **pipes/**
+        - `capitalize.pipe.ts` (Tubería para capitalizar texto)
+      - **directives/**
+        - `highlight.directive.ts` (Directiva de resaltado)
+      - **interceptors/**
+        - `http.interceptor.ts` (Interceptor HTTP para manejo de solicitudes)
+    - **features/**
+      - **superheroes/**
+        - **components/**
+          - `superhero-create.component.ts` (Componente para crear superhéroes)
+          - `superhero-edit.component.ts` (Componente para editar superhéroes)
+        - **services/**
+          - `superhero-api.service.ts` (Servicio de API para superhéroes)
+        - **store/**
+          - `superhero.actions.ts` (Acciones de superhéroes para NgRx)
+          - `superhero.reducer.ts` (Reducer de superhéroes para NgRx)
+        - `superheroes.module.ts` (Módulo de superhéroes)
+    - **app.component.ts** (Componente raíz de la aplicación)
+    - **app.module.ts** (Módulo principal de la aplicación)
+    - **app-routing.module.ts** (Enrutamiento de la aplicación)
+  - **assets/**
+    - **images/**
+      - `superman.jpg` (Imágenes de superhéroes)
+      - `batman.jpg`
+    - `fonts/` (Fuentes personalizadas, si las hay)
+  - **environments/**
+    - `environment.ts` (Configuración de entorno)
+    - `environment.prod.ts` (Configuración de entorno para producción)
+- **angular.json** (Archivo de configuración de Angular CLI)
+- **tsconfig.json** (Archivo de configuración de TypeScript)
+- **package.json** (Archivo de dependencias del proyecto)
+- **README.md** (Documentación del proyecto)
 
-En donde la distinción entre los dos servicios "core/superhero.service.ts" y "features/superheroes-data.service.ts" se basaría en mantener la separación de responsabilidades y la modularidad en la aplicación. El servicio en la carpeta "core" puede ser más genérico y reutilizable en toda la aplicación, mientras que el servicio en la carpeta "superheroes" está más relacionado con una característica específica y puede contener lógica y métodos específicos para esa característica.
+Pero he elegido otra más simple o genérica para esta app
 
-Pero en fin, no nos andemos por las ramas, vamos a crear las carpetas y los archivos necesarios para que la aplicación funcione.
+![imagen estructura](docs/screenshots/Screenshot_2_estructure.png)
 
-la estructura elegida es la siguiente:
-
-src/
-|-- app/
-|   |-- superheroes/
-|   |   |-- superheroes.module.ts
-|   |   |-- superheroes-routing.module.ts
-|   |   |-- components
-|   |   |   |-- superheroes-list/
-|   |   |   |   |-- superheroes-list.component.html
-|   |   |   |   |-- superheroes-list.component.ts
-|   |   |   |   |-- superheroes-list.component.css (o SCSS)
-|   |   |   |   |-- superheroes-list-item/
-|   |   |   |   |   |-- superheroes-list-item.component.html
-|   |   |   |   |   |-- superheroes-list-item.component.ts
-|   |   |   |   |   |-- superheroes-list-item.component.css (o SCSS)
-|   |   |   |   |   |-- superheroes-list-item.component.spec.ts (tests)
-|   |   |   |-- superheroes-detail/
-|   |   |   |   |-- superheroes-detail.component.html
-|   |   |   |   |-- superheroes-detail.component.ts
-|   |   |   |   |-- superheroes-detail.component.css (o SCSS)
-|   |   |   |   |-- superheroes-detail.component.spec.ts (tests)
-|   |   |-- services/
-|   |   |   |-- superheroes.service.ts
-|   |   |   |-- superheroes-interceptor.service.ts
-|   |   |-- guards/
-|   |   |   |-- auth.guard.ts
-|   |   |   |-- admin.guard.ts
-|   |   |-- pipes/
-|   |   |   |-- uppercase.pipe.ts
-|   |   |-- directives/
-|   |   |   |-- highlight.directive.ts
-|   |   |-- models/
-|   |   |   |-- superhero.model.ts
-|-- assets/
-|-- environments/
-|-- ...
 
   ### variables de entorno para angular
 
@@ -315,11 +295,11 @@ Vamos a la parte de los superheroes
 
 Hemos creado una comunicación de padre a hijo con los componentes superheroes-list.component y sph-list-item-iamge.component, en concreto el padre conocedor de todos los superhérores, le pasará el nombre de la imagen y el hijo lo recibirá para poder construirla dentro de la etiqueta <img> también controla que si no se le envía nombre ninguno, porque no exista, pondrá una imagen por defecto
 
-Hemos metido una paginación usando el módulo paginator de angular material, pero se va a hacer difícil, paginar datos mockeados, y tiene más trabajo que hacerlo con los datos que nos llegarían ya paginados desde el backend. Lo dejaré para el final, no quiero invertir más de 16h en esta prueba, y ha habido partes como la de docker, que tenía un poco oxidada que me consumió bastante tiempo.
+Hemos metido una paginación usando el módulo paginator de angular material, pero se va a hacer difícil, paginar datos mockeados, y tiene más trabajo que hacerlo con los datos que nos llegarían ya paginados desde el backend. Lo dejaré para el final, no quiero invertir más de 16-20h en esta prueba, y ha habido partes como la de docker, que tenía un poco oxidada que me consumió bastante tiempo.
 
 También usamos una tabla para mostrar los datos que nos llegan, usando MatTableModule
 
-Ahora para poder darle un mejor estilo sin cambiar de angular material usaré flexBox, que nos proporciona una manera simple de posicionar objetos en la vista sin demasiado esfuerzo solo con directivas y sin usar css.
+Ahora para poder darle un mejor estilo sin cambiar de angular material usaré flexLayout, que nos proporciona una manera simple de posicionar objetos en la vista sin demasiado esfuerzo solo con directivas y sin usar css.
 
 ```bash
 npm install @angular/flex-layout@latest --save
@@ -343,5 +323,24 @@ y lo usamos en las vistas, para centrar tablas, limitar su tamaño, e cambiarlo 
   <div *ngIf="dataSource" fxLayout="column" fxFlex.lg="80" fxFlex.xs="100">
 ```
 
+Hemos creado el cRUD de superheroes y hemos añadido ventanas de confirmación para cancelar una edición o un borrado de un superheroe.
 
+LLegados a este punto me falta el crear superheroe, y el filterByname, los servicos están resuletos.
+
+Recapitulemos: Sabiendo que trabajo media joranada de 5h de lunes a Jueves, para Golden Race, pude invertir en la prueba las siguientes horas:
+
+  - Lunes       0h
+  - Martes      5h  Empiezo
+  - Miercoles   0h  (estuve de vieaje en Córdoba)
+  - Jueves      5h
+  - Viernes     10h Como no trabajo para GR, le dediqué más tiempo
+
+No he temrinado la prueba, tampoco me dijeron que tiempo tenía, en la rama que se muestra en git hub, mi ultima feature era:
+
+  - feature/task03_superheroes
+
+Mañana sábado le aplicaré un par de horas más y lo dejaré así:
+
+  - feature/task04_refactoring
+  
 

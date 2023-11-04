@@ -25,3 +25,83 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-snack-bar-container.snackbar-type-soft-error .mdc-snackbar__surface .mat-mdc-button {
   color: #120303 !important;
 }
+
+/* Appearance Fill: */
+/* Info */
+.mat-mdc-snack-bar-container.snackbar-type-fill-info .mdc-snackbar__surface {
+    background-color: #718096 !important;
+}
+
+/* Success */
+.mat-mdc-snack-bar-container.snackbar-type-fill-success .mdc-snackbar__surface {
+    background-color: #48bb78 !important;
+}
+
+/* Error */
+.mat-mdc-snack-bar-container.snackbar-type-fill-error .mdc-snackbar__surface {
+    background-color: #f56565 !important;
+}
+
+.mat-mdc-snack-bar-container.snackbar-type-fill-info .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-fill-success .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-fill-error .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+    color: #ffffff !important;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label .mat-mdc-button {
+    color: #ffffff !important;
+}
+
+/* Appearance Outline: */
+/* Info */
+.mat-mdc-snack-bar-container.snackbar-type-outline-info .mdc-snackbar__surface {
+    background-color: #f3f4f6 !important;
+    border: 1px solid #cbd2d9 !important;
+    color: #64748b !important;
+}
+
+/* Success */
+.mat-mdc-snack-bar-container.snackbar-type-outline-success .mdc-snackbar__surface {
+    background-color: #e6ffed !important;
+    border: 1px solid #34d058 !important;
+    color: #229955 !important;
+}
+
+/* Error */
+.mat-mdc-snack-bar-container.snackbar-type-outline-error .mdc-snackbar__surface {
+    background-color: #fff5f5 !important;
+    border: 1px solid #e55353 !important;
+    color: #c53030 !important;
+}
+
+/* Appearance Soft: */
+/* Info */
+.mat-mdc-snack-bar-container.snackbar-type-soft-info .mdc-snackbar__surface {
+    background-color: #f3f4f6 !important;
+    color: #64748b !important;
+}
+
+/* Success */
+.mat-mdc-snack-bar-container.snackbar-type-soft-success .mdc-snackbar__surface {
+    background-color: #e6ffed !important;
+    color: #229955 !important;
+}
+
+/* Error */
+.mat-mdc-snack-bar-container.snackbar-type-soft-error .mdc-snackbar__surface {
+    background-color: #fff5f5 !important;
+    color: #c53030 !important;
+}
+
+/* Common */
+.mat-mdc-snack-bar-container.snackbar-type-outline-info .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-outline-success .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-outline-error .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-soft-info .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-soft-success .mdc-snackbar__surface,
+.mat-mdc-snack-bar-container.snackbar-type-soft-error .mdc-snackbar__surface {
+    .mat-mdc-button {
+        color: #000000 !important;
+    }
+}
