@@ -22,6 +22,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserIsAuthenticatedComponent } from './components/user-is-authenticated/user-is-authenticated.component';
 import { DialogComponent } from './share/components/dialog/dialog.component';
+// import { HoverHighlightDirective } from './share/directives/hover-highlight.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DialogComponent } from './share/components/dialog/dialog.component';
     LoginComponent,
     UserIsAuthenticatedComponent,
     DialogComponent,
+    // HoverHighlightDirective,
   ],
   imports: [
     BrowserModule,

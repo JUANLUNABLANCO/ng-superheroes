@@ -10,6 +10,7 @@ import { SphListItemImageComponent } from './components/superheroes-list/sph-lis
 import { SuperheroDetailComponent } from './components/superhero-detail/superhero-detail.component';
 import { SuperheroCreateComponent } from './components/superhero-create/superhero-create.component';
 import { SuperheroEditComponent } from './components/superhero-edit/superhero-edit.component';
+import { HoverHighlightDirective } from '../share/directives/hover-highlight.directive';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SuperheroEditComponent } from './components/superhero-edit/superhero-ed
     SphListItemImageComponent,
     SuperheroDetailComponent,
     SuperheroCreateComponent,
-    SuperheroEditComponent
+    SuperheroEditComponent,
+    HoverHighlightDirective
   ],
   imports: [
     CommonModule,
