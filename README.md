@@ -66,7 +66,7 @@ npm install --save-dev rimraf
 
 ### Creación de la estructura del proyecto
 
-Si fuese un proyecto más grande que no tuviera solo superheroes, sino otras entidades, y usando la arquitectura hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
+Si fuese un proyecto más grande que no tuviera solo superhéroes, sino otras entidades, y usando la arquitectura hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
 
 - **src/**
   - **app/**
@@ -196,24 +196,24 @@ dirigirse al navegador: http://localhost:80
 ## Crear la estructura de carpetas de la app
 
 ```bash
-# el módulo de superheroes
+# el módulo de superhéroes
 ng generate module superheroes --routing
 
 # el componente por defecto en el path http://localhost:4200/superheroes
 ng generate component superheroes/components/superheroes-list
 ng generate component superheroes/components/superheroes-list/superheroes-list-item
 
-# componente para un superheroe
+# componente para un superhéroe
 ng g c superheroes/components/superheroe-detail
 
-# servicio para los superheroes
+# servicio para los superhéroes
 ng g s superheroes/services/superheroes
 
-# crear el modelo de superheroes
+# crear el modelo de superhéroes
 touch src/app/superheroes/models/superheroes.model.ts
 
 ```
-De esta web creando un superheroe en json podemos extraer su interface
+De esta web creando un superhéroe en json podemos extraer su interface
 
 [json-to-typescript](https://transform.tools/json-to-typescript)
 
@@ -291,7 +291,7 @@ git flow init
 git flow feature start task03_superheroes
 ```
 
-Vamos a la parte de los superheroes
+Vamos a la parte de los superhéroes
 
 Hemos creado una comunicación de padre a hijo con los componentes superheroes-list.component y sph-list-item-iamge.component, en concreto el padre conocedor de todos los superhérores, le pasará el nombre de la imagen y el hijo lo recibirá para poder construirla dentro de la etiqueta <img> también controla que si no se le envía nombre ninguno, porque no exista, pondrá una imagen por defecto
 
@@ -323,9 +323,9 @@ y lo usamos en las vistas, para centrar tablas, limitar su tamaño, e cambiarlo 
   <div *ngIf="dataSource" fxLayout="column" fxFlex.lg="80" fxFlex.xs="100">
 ```
 
-Hemos creado el cRUD de superheroes y hemos añadido ventanas de confirmación para cancelar una edición o un borrado de un superheroe.
+Hemos creado el cRUD de superhéroes y hemos añadido ventanas de confirmación para cancelar una edición o un borrado de un superhéroe.
 
-LLegados a este punto me falta el crear superheroe, y el filterByname, los servicos están resuletos.
+LLegados a este punto me falta el crear superhéroe, y el filterByname, los servicos están resuletos.
 
 Recapitulemos: Sabiendo que trabajo media joranada de 5h de lunes a Jueves, para Golden Race, pude invertir en la prueba las siguientes horas:
 
@@ -342,5 +342,25 @@ No he temrinado la prueba, tampoco me dijeron que tiempo tenía, en la rama que 
 Mañana sábado le aplicaré un par de horas más y lo dejaré así:
 
   - feature/task04_refactoring
-  
+  - feature/task05_filterName
+
+### Conclusiones
+
+  Ha sido interesante tener que mokear todos los datos incluso la parte de filtrado de nombres y la paginación, no era muy difícil a nivel técnico de typescript, pero me hizo pensar, está claro que la inversión en horas y luego testing de esta forma 'sin backend', puede que no sea rentable para las empresas, pero si es verdad que para ver las habilidades de un desarrollador frontned con angular y sobre todo typescript está bien pensado, yo jamás haría este tipo de desarrollos de esta forma, siempre el backend debe llevar una feature de ventaja al menos, pero bueno es decisión de los ejecutivos de la empresa
+
+  He incluido partes que no se requerían como por ejemplo un registro, login y acceso a rutas privadas pasando el jwt, para comprobar la authenticación del usuario, creando un guard para este menester. He incluyendo con un interceptor el jwt en las cabeceras de las peticiones, claro que no tenemos un backend, ...
+  También un custom directive **AppHightlightsDirective** que marca un row de la tabla al entrar con el mouse
+  Y un Custom Pipe, **boldFirstLetter** que transforma el texto con la primera letra en mayúsculas y en <bold></bold>
+
+  En tablas con menos datos, si he creado en ocasiones, ediciones en línea dentro de la misma tabla sin salir a otra vista, para editar y/o crear nuevo registro, también en casi todos mis desarrollos y dado que edit y create son muy similares, utilizo una sola vista para ambos. En este caso he decidido hacerlo por separado, pero esto sería un refactorizado claro.
+
+  También si hubiésemos querido tener un mayor control de los datos se hubiese podido crear a nivel de aplicación un subjectBehavior para los superhéroes, de esta forma cualquier componente puede automáticamente concoer el estado de esa variable, sobre todo si cambia a lo largo deltiempo, creando uno nuevo, borrando o actualizando, o incluso en las paginaciones y filtrados en las que no tenemos un control exacto de los datos mockeados.
+
+  Las ilustraciones de los superhéroes y la data ha sido generada por IA, dándole un primer patrón de superhéroe, el me generó los otros 15 superhéroes.
+
+  Con mucho gusto les atiendo en **desarrolloaplicacionesweb.jml@gmail.com**
+
+  Un saludo, Juan Luna.
+
+
 

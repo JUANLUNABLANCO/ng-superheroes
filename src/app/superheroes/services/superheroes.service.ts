@@ -27,7 +27,7 @@ export class SuperheroesService {
     // );
     return of(SuperheroesFake) // fake data
   }
-  getListSuperheroesPaginated(page=1, limit=10): Observable<ISuperheroesPaginated> {
+  getListSuperheroesPaginatedFake(page=1, limit=10): Observable<ISuperheroesPaginated> {
     // TODO si hubiese backend sería algo así
     // let params = new HttpParams();
 
@@ -42,21 +42,62 @@ export class SuperheroesService {
     // );
 
     // SIN  backend ##########
-    return of(SuperheroesPaginatedFake)
+    return of(SuperheroesPaginatedFake); // simulamos una paginación en los propios datos devueltos
   }
-  paginateByName(page: number, size: number, name: string): Observable<ISuperheroesPaginated> {
-    let params = new HttpParams();
+  paginateByName(page: number=1, size: number=10, name: string=''): Observable<ISuperheroesPaginated> {
+    // TODO con backend
+    // let params = new HttpParams();
 
-    params = params.append('page', String(page));
-    params = params.append('limit', String(size));
-    params = params.append('name', name);
+    // params = params.append('page', String(page));
+    // params = params.append('limit', String(size));
+    // params = params.append('name', name);
 
-    return this.http.get<ISuperheroesPaginated>(`${BASE_URL}/api/superheroes`, {params}).pipe(
-      map((superheroesData: ISuperheroesPaginated) => superheroesData),
-      catchError(err => throwError(()=> new Error(err)))
-    )
-    // TODO simular paginación con filtro name, complejo
-  } 
+    // return this.http.get<ISuperheroesPaginated>(`${BASE_URL}/api/superheroes`, {params}).pipe(
+    //   map((superheroesData: ISuperheroesPaginated) => superheroesData),
+    //   catchError(err => throwError(()=> new Error(err)))
+    // )
+    // TODO simular paginación con filtro name pero haciéndola de vardad a partir del array de datos fake
+    const startIndex = (page - 1) * size;
+    const endIndex = startIndex + size;
+
+    const paginatedSuperheroes = SuperheroesFake.slice(startIndex, endIndex);
+
+    console.log('superheroes paginados: ', paginatedSuperheroes);
+
+    const totalItems = SuperheroesFake.length;
+    const itemCount = paginatedSuperheroes.length;
+    const totalPages = Math.ceil(totalItems / size);
+
+    const currentPage = page;
+
+    const links = {
+      first: `${BASE_URL}/users?limit=${size}`,
+      last: `http://127.0.0.1:3000/api/users?page=${totalPages}&limit=${size}`,
+      next: currentPage < totalPages
+        ? `http://127.0.0.1:3000/api/users?page=${currentPage + 1}&limit=${size}`
+        : "",
+      previous: currentPage > 1
+        ? `http://127.0.0.1:3000/api/users?page=${currentPage - 1}&limit=${size}`
+        : ""
+    };
+
+    const meta = {
+      totalItems: totalItems,
+      itemCount: itemCount,
+      itemsPerPage: size,
+      totalPages: totalPages,
+      currentPage: currentPage
+    };
+
+    return of({
+      items: paginatedSuperheroes,
+      meta: meta,
+      links: links
+    });
+  }
+  filterByName(filterValue: string): Observable<Superhero[]> {
+    return of(SuperheroesFake.filter(superhero => superhero.name.toLowerCase().includes(filterValue.toLowerCase())));
+  }
   getSuperhero(id: number): Observable<Superhero> {
     // TODO si hubiese backend
     // return this.http.get(`${BASE_URL}/api/superheroes/` + id).pipe(

@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../share/components/dialog/dialog.component';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 
 const BASE_THUMBNAILS_URL = environment.BASE_THUMBNAILS_URL;
 const BASE_POSTERS_URL = environment.BASE_POSTERS_URL;

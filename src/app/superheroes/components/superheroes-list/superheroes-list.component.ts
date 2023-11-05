@@ -36,7 +36,8 @@ export class SuperheroesListComponent implements OnInit {
     this.initDataSource();
   }
   private initDataSource() {
-    this.superheroesService.getListSuperheroesPaginated().subscribe({
+    // TODO sin paginación: this.superheroesService.getListSuperheroesPaginatedFake().subscribe({
+      this.superheroesService.paginateByName().subscribe({
       next: (superheroesPaginated: ISuperheroesPaginated) => {
         console.log('## superheroes', superheroesPaginated);
         this.dataSource = superheroesPaginated;
@@ -57,7 +58,7 @@ export class SuperheroesListComponent implements OnInit {
 
     if(this.filterValue == '') {
       page = page + 1;
-      this.superheroesService.getListSuperheroesPaginated(page, size).pipe(
+      this.superheroesService.paginateByName(page, size).pipe(
         map((superheroesPaginated: ISuperheroesPaginated) => this.dataSource = superheroesPaginated)
       ).subscribe();
     } else {
@@ -71,31 +72,16 @@ export class SuperheroesListComponent implements OnInit {
   //   this.router.navigate(['./' + Number(id)], { relativeTo: this.activatedRoute });
   // }
 
-  findByName(name: string) {
-    this.superheroesService.paginateByName(0, 10, name ).pipe(
-      map((superheroesPaginated: ISuperheroesPaginated) => this.dataSource = superheroesPaginated)
-    ).subscribe();
+  findByName(filterValue: string) {
+    // TODO con backend
+    // this.superheroesService.paginateByName(0, 10, name ).pipe(
+    //   map((superheroesPaginated: ISuperheroesPaginated) => this.dataSource = superheroesPaginated)
+    // ).subscribe();
+    this.superheroesService.filterByName(filterValue).subscribe({
+      next: (newSuperheroesFiltered) => {
+        console.log(`Nuevo array de superheroes filtrado por: ${filterValue} `, newSuperheroesFiltered);
+        this.dataSource.items = newSuperheroesFiltered;
+      }
+    });
   }
-
-  // addNewRow() {
-  //   const newSuperhero: Superhero = {
-  //     id: 0,
-  //     name: "New Super Hero",
-  //     alias: "new",
-  //     powers: ["Super strength", "Flight", "Heat vision"],
-  //     enemies: ["Lex Luthor", "Doomsday"],
-  //     city: "City",
-  //     image: "",
-  //     bio: "Lore ipsum dolor sit amen..."
-  //   };
-  //   this.dataSource.items = [newSuperhero, ...this.dataSource.items];
-
-  //   this.creatingSuperhero = true;
-  // }
-  // createSuperhero(newSuperhero: Superhero) {
-  //   console.log('Nuevo superheroe: ', newSuperhero);
-  //   this.superheroesService.createSuperhero(newSuperhero).subscribe(newSuperheroesFakeList => {
-  //     console.log(newSuperheroesFakeList);
-  //   });
-  // }
 }

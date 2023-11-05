@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, map } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../share/components/dialog/dialog.component';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 
 import { Superhero } from '../../models/superhero.model';
 

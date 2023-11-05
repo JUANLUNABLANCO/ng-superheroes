@@ -235,7 +235,7 @@ export const EnemiesFake: string[] = [
 export var SuperheroesPaginatedFake = {
   items: SuperheroesFake,
   meta: {
-    totalItems: 16,
+    totalItems: SuperheroesFake.length,
     itemCount: 10,
     itemsPerPage: 10,
     totalPages: 2,

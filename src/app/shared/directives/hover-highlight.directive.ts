@@ -8,7 +8,7 @@ export class HoverHighlightDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('#48A088'); // Cambia el color cuando el mouse entra
+    this.highlight('#CCE4F6'); // Cambia el color cuando el mouse entra 48A088
   }
 
   @HostListener('mouseleave') onMouseLeave() {

@@ -10,7 +10,9 @@ import { SphListItemImageComponent } from './components/superheroes-list/sph-lis
 import { SuperheroDetailComponent } from './components/superhero-detail/superhero-detail.component';
 import { SuperheroCreateComponent } from './components/superhero-create/superhero-create.component';
 import { SuperheroEditComponent } from './components/superhero-edit/superhero-edit.component';
-import { HoverHighlightDirective } from '../share/directives/hover-highlight.directive';
+import { HoverHighlightDirective } from '../shared/directives/hover-highlight.directive';
+import { BoldFirstLetterPipe } from '../shared/pipes/bold-first-letter.pipe';
+
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { HoverHighlightDirective } from '../share/directives/hover-highlight.dir
     SuperheroDetailComponent,
     SuperheroCreateComponent,
     SuperheroEditComponent,
-    HoverHighlightDirective
+    HoverHighlightDirective,
+    BoldFirstLetterPipe
   ],
   imports: [
     CommonModule,

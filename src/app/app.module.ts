@@ -21,8 +21,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserIsAuthenticatedComponent } from './components/user-is-authenticated/user-is-authenticated.component';
-import { DialogComponent } from './share/components/dialog/dialog.component';
-// import { HoverHighlightDirective } from './share/directives/hover-highlight.directive';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { DialogComponent } from './share/components/dialog/dialog.component';
     RegisterComponent,
     LoginComponent,
     UserIsAuthenticatedComponent,
-    DialogComponent,
-    // HoverHighlightDirective,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

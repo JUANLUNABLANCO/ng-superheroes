@@ -29,7 +29,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20%" class="border-grey-light"> Name </mat-header-cell>
-        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light"> {{superhero.name | uppercase}} </mat-cell>
+        <mat-cell *matCellDef="let superhero" fxFlex="20%" class="border-grey-light" [innerHTML]="superhero.name | boldFirstLetter" > </mat-cell>
       </ng-container>
 
       <!-- alias Column -->
