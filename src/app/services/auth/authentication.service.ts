@@ -52,6 +52,7 @@ export class AuthenticationService {
     if (email === UserFake.email && password === UserFake.password) {
       console.log('## access_token: ', token_fake);
       console.log('PAY ATTEMPTION!! look for the "access_token" in the local storage');
+      localStorage.setItem(JWT_NAME, token_fake);
       return of(token_fake); // TODO esto sería en verdad tarea del backend devolvernos el token encriptado a partir del payload
     } else {
       // simulamos error

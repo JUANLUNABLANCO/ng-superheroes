@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
+  { // ruta privada debes estar authenticado para acceder
     path: 'user-is-authenticated',
     component: UserIsAuthenticatedComponent,
     canActivate: [AuthGuard]

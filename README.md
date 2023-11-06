@@ -66,81 +66,61 @@ npm install --save-dev rimraf
 
 ### Creación de la estructura del proyecto
 
-Si fuese un proyecto más grande que no tuviera solo superheroes, sino otras entidades, y usando la arquitectyra hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
+Si fuese un proyecto más grande que no tuviera solo superhéroes, sino otras entidades, y usando la arquitectura hexagonal por capas, esta podría ser la estuctura general de ese proyecto:
 
-superheroes-app/
-│
-├── src/
-│   │
-│   ├── app/
-│   │   │
-│   │   ├── core/
-│   │   │   │
-│   │   │   ├── domain/
-│   │   │   │   ├── superhero.model.ts
-│   │   │   │
-│   │   │   ├── services/
-│   │   │   │   ├── superhero.service.ts
-│   │   │
-│   │   ├── features/
-│   │   │   │
-│   │   │   ├── superheroes/
-│   │   │   │   │
-│   │   │   │   ├── components/
-│   │   │   │   │   ├── superhero-list.component.ts
-│   │   │   │   │   ├── superhero-detail.component.ts
-│   │   │   │   │   ├── superhero-form.component.ts
-│   │   │   │   │
-│   │   │   │   ├── services/
-│   │   │   │   │   ├── superheroes-data.service.ts
-│   │   │   │   │
-│   │   │   │   ├── superheroes.module.ts
-│
-├── assets/
-├── environments/
-├── ...
+- **src/**
+  - **app/**
+    - **core/**
+      - **models/**
+        - `superhero.model.ts` (Modelos de superhéroes)
+      - **services/**
+        - `superhero.service.ts` (Servicios para superhéroes)
+      - **guards/**
+        - `auth.guard.ts` (Guardia de autenticación)
+      - `core.module.ts` (Módulo principal de la aplicación)
+    - **shared/**
+      - **components/**
+        - `superhero-list.component.ts` (Componente de lista de superhéroes)
+        - `superhero-detail.component.ts` (Componente de detalles de superhéroes)
+      - **modules/**
+        - `shared.module.ts` (Módulo compartido)
+      - **pipes/**
+        - `capitalize.pipe.ts` (Tubería para capitalizar texto)
+      - **directives/**
+        - `highlight.directive.ts` (Directiva de resaltado)
+      - **interceptors/**
+        - `http.interceptor.ts` (Interceptor HTTP para manejo de solicitudes)
+    - **features/**
+      - **superheroes/**
+        - **components/**
+          - `superhero-create.component.ts` (Componente para crear superhéroes)
+          - `superhero-edit.component.ts` (Componente para editar superhéroes)
+        - **services/**
+          - `superhero-api.service.ts` (Servicio de API para superhéroes)
+        - **store/**
+          - `superhero.actions.ts` (Acciones de superhéroes para NgRx)
+          - `superhero.reducer.ts` (Reducer de superhéroes para NgRx)
+        - `superheroes.module.ts` (Módulo de superhéroes)
+    - **app.component.ts** (Componente raíz de la aplicación)
+    - **app.module.ts** (Módulo principal de la aplicación)
+    - **app-routing.module.ts** (Enrutamiento de la aplicación)
+  - **assets/**
+    - **images/**
+      - `superman.jpg` (Imágenes de superhéroes)
+      - `batman.jpg`
+    - `fonts/` (Fuentes personalizadas, si las hay)
+  - **environments/**
+    - `environment.ts` (Configuración de entorno)
+    - `environment.prod.ts` (Configuración de entorno para producción)
+- **angular.json** (Archivo de configuración de Angular CLI)
+- **tsconfig.json** (Archivo de configuración de TypeScript)
+- **package.json** (Archivo de dependencias del proyecto)
+- **README.md** (Documentación del proyecto)
 
-En donde la distinción entre los dos servicios "core/superhero.service.ts" y "features/superheroes-data.service.ts" se basaría en mantener la separación de responsabilidades y la modularidad en la aplicación. El servicio en la carpeta "core" puede ser más genérico y reutilizable en toda la aplicación, mientras que el servicio en la carpeta "superheroes" está más relacionado con una característica específica y puede contener lógica y métodos específicos para esa característica.
+Pero he elegido otra más simple o genérica para esta app
 
-Pero en fin, no nos andemos por las ramas, vamos a crear las carpetas y los archivos necesarios para que la aplicación funcione.
+![imagen estructura](docs/screenshots/Screenshot_2_estructure.png)
 
-la estructura elegida es la siguiente:
-
-src/
-|-- app/
-|   |-- superheroes/
-|   |   |-- superheroes.module.ts
-|   |   |-- superheroes-routing.module.ts
-|   |   |-- components
-|   |   |   |-- superheroes-list/
-|   |   |   |   |-- superheroes-list.component.html
-|   |   |   |   |-- superheroes-list.component.ts
-|   |   |   |   |-- superheroes-list.component.css (o SCSS)
-|   |   |   |   |-- superheroes-list-item/
-|   |   |   |   |   |-- superheroes-list-item.component.html
-|   |   |   |   |   |-- superheroes-list-item.component.ts
-|   |   |   |   |   |-- superheroes-list-item.component.css (o SCSS)
-|   |   |   |   |   |-- superheroes-list-item.component.spec.ts (tests)
-|   |   |   |-- superheroes-detail/
-|   |   |   |   |-- superheroes-detail.component.html
-|   |   |   |   |-- superheroes-detail.component.ts
-|   |   |   |   |-- superheroes-detail.component.css (o SCSS)
-|   |   |   |   |-- superheroes-detail.component.spec.ts (tests)
-|   |   |-- services/
-|   |   |   |-- superheroes.service.ts
-|   |   |   |-- superheroes-interceptor.service.ts
-|   |   |-- guards/
-|   |   |   |-- auth.guard.ts
-|   |   |   |-- admin.guard.ts
-|   |   |-- pipes/
-|   |   |   |-- uppercase.pipe.ts
-|   |   |-- directives/
-|   |   |   |-- highlight.directive.ts
-|   |   |-- models/
-|   |   |   |-- superhero.model.ts
-|-- assets/
-|-- environments/
-|-- ...
 
   ### variables de entorno para angular
 
@@ -216,24 +196,24 @@ dirigirse al navegador: http://localhost:80
 ## Crear la estructura de carpetas de la app
 
 ```bash
-# el módulo de superheroes
+# el módulo de superhéroes
 ng generate module superheroes --routing
 
 # el componente por defecto en el path http://localhost:4200/superheroes
 ng generate component superheroes/components/superheroes-list
 ng generate component superheroes/components/superheroes-list/superheroes-list-item
 
-# componente para un superheroe
+# componente para un superhéroe
 ng g c superheroes/components/superheroe-detail
 
-# servicio para los superheroes
+# servicio para los superhéroes
 ng g s superheroes/services/superheroes
 
-# crear el modelo de superheroes
+# crear el modelo de superhéroes
 touch src/app/superheroes/models/superheroes.model.ts
 
 ```
-De esta web creando un superheroe en json podemos extraer su interface
+De esta web creando un superhéroe en json podemos extraer su interface
 
 [json-to-typescript](https://transform.tools/json-to-typescript)
 
@@ -292,7 +272,95 @@ Lo suyo es crear otros guards como por ejemplo:
   1. **UserIsUserGuard:** que compruebe que el usuario que accede a una ruta es el usuario que corresponde, así nadie podrá entrar en nuestro perfil
   2. **AdminGuard:** que ese usuario que está intentando acceder a esa ruta privada de administración tiene un role de 'admin'
 
-Vamos a la parte de los superheroes
+hemos añadido un toast o sweetalert, en concreto es de angularMaterial, para mensajes al usuario y aumentar así la experiencia del mismo
+
+Antes de meternos en más jaleo, voy a proponer git flow, antes debo subir la la task01_scafolding y task02_auth
+
+```bash
+# subir el codigo antes de implementar git flow
+git branch -M main
+git status
+git add .
+git commit -m "task02_auth: authentication, register, login, jwt, guard, interceptor, ..."
+git push
+
+# empezar git flow y configurarlo
+git flow init
+
+# comenzar una nueva feature
+git flow feature start task03_superheroes
+```
+
+Vamos a la parte de los superhéroes
+
+Hemos creado una comunicación de padre a hijo con los componentes superheroes-list.component y sph-list-item-iamge.component, en concreto el padre conocedor de todos los superhérores, le pasará el nombre de la imagen y el hijo lo recibirá para poder construirla dentro de la etiqueta <img> también controla que si no se le envía nombre ninguno, porque no exista, pondrá una imagen por defecto
+
+Hemos metido una paginación usando el módulo paginator de angular material, pero se va a hacer difícil, paginar datos mockeados, y tiene más trabajo que hacerlo con los datos que nos llegarían ya paginados desde el backend. Lo dejaré para el final, no quiero invertir más de 16-20h en esta prueba, y ha habido partes como la de docker, que tenía un poco oxidada que me consumió bastante tiempo.
+
+También usamos una tabla para mostrar los datos que nos llegan, usando MatTableModule
+
+Ahora para poder darle un mejor estilo sin cambiar de angular material usaré flexLayout, que nos proporciona una manera simple de posicionar objetos en la vista sin demasiado esfuerzo solo con directivas y sin usar css.
+
+```bash
+npm install @angular/flex-layout@latest --save
+```
+
+importamos su módulo a nivel genérico, dentro del MaterialModule
+
+```typescript
+import { FlexLayoutModule } from ‘@angular/flex-layout’;
+@NgModule({
+    declarations: [ ... ],
+    imports: [ ..., FlexLayoutModule ],
+})
+export class MaterialModule { }
+```
+
+y lo usamos en las vistas, para centrar tablas, limitar su tamaño, e cambiarlo en dispositivos más pequeños
+
+```html
+<div fxLayout="row" fxLayoutAlign="center">
+  <div *ngIf="dataSource" fxLayout="column" fxFlex.lg="80" fxFlex.xs="100">
+```
+
+Hemos creado el cRUD de superhéroes y hemos añadido ventanas de confirmación para cancelar una edición o un borrado de un superhéroe.
+
+LLegados a este punto me falta el crear superhéroe, y el filterByname, los servicos están resuletos.
+
+Recapitulemos: Sabiendo que trabajo media joranada de 5h de lunes a Jueves, para Golden Race, pude invertir en la prueba las siguientes horas:
+
+  - Lunes       0h
+  - Martes      5h  Empiezo
+  - Miercoles   0h  (estuve de vieaje en Córdoba)
+  - Jueves      5h
+  - Viernes     10h Como no trabajo para GR, le dediqué más tiempo
+
+No he temrinado la prueba, tampoco me dijeron que tiempo tenía, en la rama que se muestra en git hub, mi ultima feature era:
+
+  - feature/task03_superheroes
+
+Mañana sábado le aplicaré un par de horas más y lo dejaré así:
+
+  - feature/task04_refactoring
+  - feature/task05_filterName
+
+### Conclusiones
+
+  Ha sido interesante tener que mokear todos los datos incluso la parte de filtrado de nombres y la paginación, no era muy difícil a nivel técnico de typescript, pero me hizo pensar, está claro que la inversión en horas y luego testing de esta forma 'sin backend', puede que no sea rentable para las empresas, pero si es verdad que para ver las habilidades de un desarrollador frontned con angular y sobre todo typescript está bien pensado, yo jamás haría este tipo de desarrollos de esta forma, siempre el backend debe llevar una feature de ventaja al menos, pero bueno es decisión de los ejecutivos de la empresa
+
+  He incluido partes que no se requerían como por ejemplo un registro, login y acceso a rutas privadas pasando el jwt, para comprobar la authenticación del usuario, creando un guard para este menester. He incluyendo con un interceptor el jwt en las cabeceras de las peticiones, claro que no tenemos un backend, ...
+  También un custom directive **AppHightlightsDirective** que marca un row de la tabla al entrar con el mouse
+  Y un Custom Pipe, **boldFirstLetter** que transforma el texto con la primera letra en mayúsculas y en <bold></bold>
+
+  En tablas con menos datos, si he creado en ocasiones, ediciones en línea dentro de la misma tabla sin salir a otra vista, para editar y/o crear nuevo registro, también en casi todos mis desarrollos y dado que edit y create son muy similares, utilizo una sola vista para ambos. En este caso he decidido hacerlo por separado, pero esto sería un refactorizado claro.
+
+  También si hubiésemos querido tener un mayor control de los datos se hubiese podido crear a nivel de aplicación un subjectBehavior para los superhéroes, de esta forma cualquier componente puede automáticamente concoer el estado de esa variable, sobre todo si cambia a lo largo deltiempo, creando uno nuevo, borrando o actualizando, o incluso en las paginaciones y filtrados en las que no tenemos un control exacto de los datos mockeados.
+
+  Las ilustraciones de los superhéroes y la data ha sido generada por IA, dándole un primer patrón de superhéroe, el me generó los otros 15 superhéroes.
+
+  Con mucho gusto les atiendo en **desarrolloaplicacionesweb.jml@gmail.com**
+
+  Un saludo, Juan Luna.
 
 
 
